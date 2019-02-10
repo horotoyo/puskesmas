@@ -211,36 +211,6 @@
 				</div>
 				<!-- /service -->
 
-				<!-- service -->
-				<!-- <div class="col-md-4 col-sm-6">
-					<div class="service">
-						<i class="fa fa-diamond"></i>
-						<h3>Marketing</h3>
-						<p>Meningkatkan pengembangan dan pendayagunaan SDM kesehatan yang <a href="#">... Read more</a></p>
-					</div>
-				</div> -->
-				<!-- /service -->
-
-				<!-- service -->
-				<!-- <div class="col-md-4 col-sm-6">
-					<div class="service">
-						<i class="fa fa-pencil"></i>
-						<h3>Awesome Support</h3>
-						<p>Meningkatkan ketersediaan, pemerataan, dan keterjangkauan obat dan <a href="#">... Read more</a></p>
-					</div>
-				</div> -->
-				<!-- /service -->
-
-				<!-- service -->
-				<!-- <div class="col-md-4 col-sm-6">
-					<div class="service">
-						<i class="fa fa-flask"></i>
-						<h3>Brand Design</h3>
-						<p>Meningkatkan manajemen kesehatan yang akuntabel, transparan <a href="#">... Read more</a></p>
-					</div>
-				</div> -->
-				<!-- /service -->
-
 			</div>
 			<!-- /Row -->
 
@@ -613,13 +583,26 @@
 
 				<!-- contact form -->
 				<div class="col-md-8 col-md-offset-2">
-					<form class="contact-form">
-						<input type="text" class="input" placeholder="Name">
-						<input type="email" class="input" placeholder="Email">
-						<textarea class="input" placeholder="Message"></textarea>
-						<button class="main-btn">Send message</button>
+					<form class="contact-form" method="POST">
+						<input type="text" name="nama" class="input" placeholder="Name" required="">
+						<input type="email" name="email" class="input" placeholder="Email" required="">
+						<textarea class="input" name="isi" placeholder="Message" required=""></textarea>
+						<button type="submit" class="main-btn">Send message</button>
 					</form>
+					
 				</div>
+
+					<?php
+					include 'config/koneksi.php';
+
+					$nama		= (isset($_POST ['nama'])?$_POST ['nama']:"");
+					$email 		= (isset($_POST ['email'])?$_POST ['email']:"");
+					$isi 		= (isset($_POST ['isi'])?$_POST ['isi']:"");
+					$tanggal 	= date("Y-m-d");
+					
+					$sql = "INSERT INTO pesan (nama, email, isi, tanggal) VALUES ('$nama', '$email', '$isi', '$tanggal')";
+					mysqli_query($konek,$sql);
+					?>
 				<!-- /contact form -->
 
 			</div>

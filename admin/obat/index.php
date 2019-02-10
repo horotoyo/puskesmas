@@ -95,8 +95,6 @@ if (isset($_SESSION['email'])) {
                   include '../../config/koneksi.php';
                   include '../../config/function.php';
 
-                  $metu   = $_SESSION['user'];
-                  $tampil = $_SESSION['id'];
                   $nomor  = 1;
 
                   $sql    = "SELECT * FROM obat";
@@ -112,7 +110,6 @@ if (isset($_SESSION['email'])) {
                               <td>".jika($row['status'])."</td>
                               <td>".$row['jumlah']." ".$row['satuan']."</td>
                               <td>
-                                <button class='btn btn-info btn-xs myBtn'>Detail</button>
                                 <a href='obat_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
                                 <a href='obat_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
                               </td>

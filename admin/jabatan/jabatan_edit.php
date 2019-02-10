@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Obat | Input</title>
+  <title>Jabatan | Edit</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -34,13 +34,13 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Obat
+        Jabatan
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="index.php"> Obat</a></li>
-        <li class="active">Input Obat</li>
+        <li><a href="index.php"> Jabatan</a></li>
+        <li class="active">Edit Jabatan</li>
       </ol>
     </section>
 
@@ -48,36 +48,30 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Input Obat</h3>
+          <h3 class="box-title">Edit Jabatan</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="obat_input_proses.php" method="POST"">
+        <form role="form" action="jabatan_edit_proses.php" method="POST"">
+          <?php 
+           include '../../config/koneksi.php';
+
+           $ID       = $_GET['id'];
+           $sql      = "SELECT * FROM jabatan WHERE id='$ID'";
+           $result   = mysqli_query($konek, $sql);
+           $row      = mysqli_fetch_assoc($result);
+
+          ?>
           <div class="box-body">
-
+            <input type="hidden" name="id" value="<?php echo $ID; ?>">
             <div class="form-group">
-              <label for="nama">Nama Obat <span class="text-red">*</span></label>
-              <input type="text" class="form-control" id="nama" name="nama" required>
-            </div>
-
-            <div class="form-group">
-              <label for="expired">Tanggal Expired <span class="text-red">*</span></label>
-              <input type="date" class="form-control" id="expired" name="expired" required>
-            </div>
-
-            <label for="jumlah">Jumlah <span class="text-red">*</span></label>
-            <div class="form-group row">
-              <div class="col-xs-3" style="padding-right: 0px">
-                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="jml">
-              </div>
-              <div class="col-xs-4" style="padding-left: 0px">
-                 <input type="text" class="form-control" id="satuan" name="satuan" placeholder="satuan">
-              </div>
+              <label for="nama">Jabatan <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama'] ?>">
             </div>
 
             <div class="box-footer">
                 <a type="reset" class="btn btn-default" href="index.php">Cancel</a>
-                <button type="submit" class="btn btn-success pull-right">Input</button>
+                <button type="submit" class="btn btn-success pull-right">Submit</button>
             </div>
 
 

@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Obat | Input</title>
+  <title>Dokter | Input</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -34,13 +34,13 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Obat
+        Dokter
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="index.php"> Obat</a></li>
-        <li class="active">Input Obat</li>
+        <li><a href="index.php"> Dokter</a></li>
+        <li class="active">Edit Data Dokter</li>
       </ol>
     </section>
 
@@ -48,32 +48,84 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Input Obat</h3>
+          <h3 class="box-title">Edit Data Dokter</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="obat_input_proses.php" method="POST"">
+        <form role="form" action="dokter_edit_proses.php" method="POST"">
+            <?php 
+            include '../../config/koneksi.php';
+            include '../../config/function.php';
+
+
+            $ID       = $_GET['id'];
+            $sql      = "SELECT * FROM dokter WHERE id='$ID'";
+            $result   = mysqli_query($konek, $sql);
+            $row      = mysqli_fetch_assoc($result);
+
+            ?>
           <div class="box-body">
 
+            <input type="hidden" name="id" value="<?php echo $ID; ?>">
             <div class="form-group">
-              <label for="nama">Nama Obat <span class="text-red">*</span></label>
-              <input type="text" class="form-control" id="nama" name="nama" required>
+              <label for="nama">Nama Dokter <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama'] ?>">
             </div>
 
             <div class="form-group">
-              <label for="expired">Tanggal Expired <span class="text-red">*</span></label>
-              <input type="date" class="form-control" id="expired" name="expired" required>
+              <label for="jabatan">Jabatan <span class="text-red">*</span></label>
+              <select name="jabatan" id="jabatan" class="form-control" >
+                <option value="<?= $row['id_jabatan'] ?>"><?= jabatan($row['id_jabatan']) ?></option>
+                  <?php
+                    include '../../config/koneksi.php';
+                    $sql1  = "SELECT * FROM jabatan";
+                    $result1 = mysqli_query($konek, $sql1);
+                    if (mysqli_num_rows($result1) > 0) {
+                      while ($row1 = mysqli_fetch_assoc($result1)) {
+                        echo "<option value=".$row1['id'].">".$row1['nama']."</option>";
+                      }
+                    }
+                  ?>
+              </select>
             </div>
 
-            <label for="jumlah">Jumlah <span class="text-red">*</span></label>
-            <div class="form-group row">
-              <div class="col-xs-3" style="padding-right: 0px">
-                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="jml">
-              </div>
-              <div class="col-xs-4" style="padding-left: 0px">
-                 <input type="text" class="form-control" id="satuan" name="satuan" placeholder="satuan">
-              </div>
+            <div class="form-group">
+              <label for="nip">NIP <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="nip" name="nip" value="<?= $row['nip'] ?>">
             </div>
+
+            <div class="form-group">
+              <label for="gol">Golongan <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="gol" name="gol" value="<?= $row['gol'] ?>">
+            </div>
+
+            <div class="form-group">
+              <label for="telp">No. Telepon <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="telp" name="telp" value="<?= $row['telepon'] ?>">
+            </div>
+
+            <div class="form-group">
+              <label for="alamat">Alamat <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="alamat" name="alamat" value="<?= $row['alamat'] ?>">
+            </div>
+
+            <div class="form-group">
+              <label for="layanan">Jenis Pelayanan <span class="text-red">*</span></label>
+              <select name="layanan" id="layanan" class="form-control">
+                <option value="<?= $row['id_jabatan'] ?>"><?= pelayanan($row['id_pelayanan']) ?></option>
+                  <?php
+                    include '../../config/koneksi.php';
+                    $sql2  = "SELECT * FROM layanan";
+                    $result2 = mysqli_query($konek, $sql2);
+                    if (mysqli_num_rows($result2) > 0) {
+                      while ($row2 = mysqli_fetch_assoc($result2)) {
+                        echo "<option value=".$row2['id'].">".$row2['nama']."</option>";
+                      }
+                    }
+                  ?>
+              </select>
+            </div>
+
 
             <div class="box-footer">
                 <a type="reset" class="btn btn-default" href="index.php">Cancel</a>

@@ -1,26 +1,8 @@
-<?php
-$server   = "localhost";
-$user   = "root";
-$pass   = "123";
-$db     = "puskesmas";
-
-$konek = mysqli_connect($server, $user, $pass, $db);
-if (!$konek) {
-  die('koneksi gagal' . mysqli_error());
-} 
-//else {echo "berhasil";}
-
-$ID     = $_SESSION['id'];
-$sql    = "SELECT * FROM user WHERE id='$ID'";
-$result = mysqli_query($konek, $sql);
-$row    = mysqli_fetch_assoc($result);
-
-?>
 <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo 'http://localhost/agency/img/gambar/user-img/'.$row['photo']?>" class="img-circle" alt="User Image">
+          <img src="<?php echo '../../img/gambar/user-img/'.$row['photo']?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $row['nama']?></p>
@@ -50,18 +32,80 @@ $row    = mysqli_fetch_assoc($result);
         </div>
       </form>
 
-      <ul class="sidebar-menu" data-widget="tree">
+      <?php
+      include '../../config/koneksi.php';
+      
+      $url    = $_SERVER["PHP_SELF"];
+      $exp    = explode("/", $url);
+      $get    = $exp[3];
+      ?>
+
+            <ul class="sidebar-menu" data-widget="tree">
               <li class="header">MAIN NAVIGATION</li>
               <li>
-                <a href="http://localhost/agency/admin/home/">
+                <a href="../home/">
                   <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
               </li>
-              <li>
-                <a href="http://localhost/agency/admin/obat/">
-                  <i class="fa fa-medkit"></i> <span>Obat</span>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-user-md"></i>
+                  <span>Pegawai</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
                 </a>
+                <ul class="treeview-menu">
+                  <li><a href="../jabatan/"><i class="fa fa-circle-o"></i> Jabatan</a></li>
+                  <li><a href="../dokter/"><i class="fa fa-circle-o"></i> Dokter</a></li>
+                  <li><a href="../staff/"><i class="fa fa-circle-o"></i> Staff</a></li>
+                </ul>
               </li>
-            </ul>               
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-wheelchair"></i>
+                  <span>Pasien</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="../pengunjung/"><i class="fa fa-circle-o"></i> Pengunjung</a></li>
+                  <li><a href="../member/"><i class="fa fa-circle-o"></i> Member</a></li>
+                </ul>
+              </li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-ambulance"></i>
+                  <span>Pelayanan</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="../layanan/"><i class="fa fa-circle-o"></i> Jenis Pelayanan</a></li>
+                  <li><a href="../ruangan/"><i class="fa fa-circle-o"></i> Ruangan</a></li>
+                  <li><a href="../obat/"><i class="fa fa-circle-o"></i> Stock Obat</a></li>
+                </ul>
+              </li>
+              <li class="treeview">
+                <a href="#">
+                  <i class="fa fa-users"></i>
+                  <span>Blog</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <li><a href="../pesan/"><i class="fa fa-circle-o"></i> Pesan</a></li>
+                  <li><a href="../user/"><i class="fa fa-circle-o"></i> User</a></li>
+                  <li><a href="../role/"><i class="fa fa-circle-o"></i> Role</a></li>
+                </ul>
+              </li>
+            </ul>
+      
+
+
+                     
     ?>
   </section>

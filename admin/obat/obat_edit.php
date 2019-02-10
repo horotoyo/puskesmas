@@ -40,7 +40,7 @@ if (isset($_SESSION['email'])) {
       <ol class="breadcrumb">
         <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="index.php"> Obat</a></li>
-        <li class="active">Input Obat</li>
+        <li class="active">Edit Data Obat</li>
       </ol>
     </section>
 
@@ -48,30 +48,41 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Input Obat</h3>
+          <h3 class="box-title">Edit Data Obat</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="obat_input_proses.php" method="POST"">
+        <form role="form" action="obat_edit_proses.php" method="POST"">
           <div class="box-body">
 
+            <?php 
+            include '../../config/koneksi.php';
+
+            $ID       = $_GET['id'];
+            $sql      = "SELECT * FROM obat WHERE id='$ID'";
+            $result   = mysqli_query($konek, $sql);
+            $row      = mysqli_fetch_assoc($result);
+
+            ?>
+            <input type="hidden" name="id" value="<?php echo $ID; ?>">
+            
             <div class="form-group">
-              <label for="nama">Nama Obat <span class="text-red">*</span></label>
-              <input type="text" class="form-control" id="nama" name="nama" required>
+              <label for="nama">Nama Obat</label>
+              <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama'] ?>">
             </div>
 
             <div class="form-group">
-              <label for="expired">Tanggal Expired <span class="text-red">*</span></label>
-              <input type="date" class="form-control" id="expired" name="expired" required>
+              <label for="expired">Tanggal Expired</label>
+              <input type="date" class="form-control" id="expired" name="expired" value="<?= $row['expired'] ?>">
             </div>
 
-            <label for="jumlah">Jumlah <span class="text-red">*</span></label>
+            <label for="jumlah">Jumlah</label>
             <div class="form-group row">
               <div class="col-xs-3" style="padding-right: 0px">
-                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="jml">
+                <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?= $row['jumlah'] ?>">
               </div>
               <div class="col-xs-4" style="padding-left: 0px">
-                 <input type="text" class="form-control" id="satuan" name="satuan" placeholder="satuan">
+                 <input type="text" class="form-control" id="satuan" name="satuan" value="<?= $row['satuan'] ?>" placeholder="satuan">
               </div>
             </div>
 

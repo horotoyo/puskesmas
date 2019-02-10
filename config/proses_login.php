@@ -19,10 +19,9 @@ if(!empty($email) && !empty($pass)) {
 	if (mysqli_num_rows($query2)>0) {
 		$_SESSION['email']		= $email;
 		$_SESSION['nama']		= $row2['nama'];
-		$_SESSION['photo']		= $row2['photo'];
 		$_SESSION['id']			= $row2['id'];
 		$_SESSION['user']		= $row2['role_id'];
-		$_SESSION['ori']		= $ori;
+		$_SESSION['photo']		= $row2['photo'];
 
 		//checking for type user
 		$user     = $_SESSION['user'];

@@ -19,13 +19,13 @@ $row    = mysqli_fetch_assoc($result);
 
 <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?php echo 'http://localhost/agency/img/gambar/user-img/'.$row['photo']?>" class="user-image" alt="User Image">
+              <img src="<?php echo '../../img/gambar/user-img/'.$row['photo']?>" class="user-image" alt="User Image">
               <span class="hidden-xs"><?php echo $row['nama']?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?php echo 'http://localhost/agency/img/gambar/user-img/'.$row['photo']?>" class="img-circle" alt="User Image">
+                <img src="<?php echo '../../img/gambar/user-img/'.$row['photo']?>" class="img-circle" alt="User Image">
 
                 <p>
                   <?php echo $row['nama']?>
@@ -39,11 +39,11 @@ $row    = mysqli_fetch_assoc($result);
                 <div class="pull-left">
                   <?php
                   $user   = $_SESSION['id'];
-                  echo "<a href='http://localhost/agency/admin/profil/index.php?id=".$user."' class='btn btn-default btn-flat'>Profile</a> ";
+                  echo "<a href='../../admin/profil/index.php?id=".$user."' class='btn btn-default btn-flat'>Profile</a> ";
                   ?>
                 </div>
                 <div class="pull-right">
-                  <a href="http://localhost/agency/admin/logout.php" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="../../admin/logout.php" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

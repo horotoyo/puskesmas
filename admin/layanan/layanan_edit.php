@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Obat | Input</title>
+  <title>Jenis Pelayanan | Edit</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -34,13 +34,13 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Obat
+        Jenis Pelayanan
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="index.php"> Obat</a></li>
-        <li class="active">Input Obat</li>
+        <li><a href="index.php"> Jenis Pelayanan</a></li>
+        <li class="active">Edit Jenis Pelayanan</li>
       </ol>
     </section>
 
@@ -48,32 +48,42 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Input Obat</h3>
+          <h3 class="box-title">Edit Jenis Pelayanan</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="obat_input_proses.php" method="POST"">
+        <form role="form" action="layanan_edit_proses.php" method="POST"">
+          <?php 
+           include '../../config/koneksi.php';
+
+           $ID       = $_GET['id'];
+           $sql      = "SELECT * FROM layanan WHERE id='$ID'";
+           $result   = mysqli_query($konek, $sql);
+           $row      = mysqli_fetch_assoc($result);
+
+          ?>
           <div class="box-body">
+            <input type="hidden" name="id" value="<?php echo $ID; ?>">
+            <div class="form-group">
+              <label for="nama">Jenis Pelayanan <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama']?>">
+            </div>
 
             <div class="form-group">
-              <label for="nama">Nama Obat <span class="text-red">*</span></label>
-              <input type="text" class="form-control" id="nama" name="nama" required>
+              <label for="deskripsi">Deskripsi</label>
+                <textarea class="textarea" placeholder="Place some text here" name="deskripsi" 
+                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">
+                <?= $row['deskripsi']?>            
+                </textarea>
             </div>
 
-            <div class="form-group">
-              <label for="expired">Tanggal Expired <span class="text-red">*</span></label>
-              <input type="date" class="form-control" id="expired" name="expired" required>
-            </div>
+<!--             <div class="form-group">
+              <label for="deskripsi">Deskripsi</label>
+              <div>
+                <textarea class="box-body pad" id="editor1" name="deskripsi" rows="10" cols="80"></textarea>
+              </div>
+            </div> -->
 
-            <label for="jumlah">Jumlah <span class="text-red">*</span></label>
-            <div class="form-group row">
-              <div class="col-xs-3" style="padding-right: 0px">
-                <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="jml">
-              </div>
-              <div class="col-xs-4" style="padding-left: 0px">
-                 <input type="text" class="form-control" id="satuan" name="satuan" placeholder="satuan">
-              </div>
-            </div>
 
             <div class="box-footer">
                 <a type="reset" class="btn btn-default" href="index.php">Cancel</a>
