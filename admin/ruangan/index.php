@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Jenis Pelayanan</title>
+  <title>Ruangan</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -59,11 +59,11 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Daftar Jenis Pelayanan
+        Daftar Ruangan
       </h1>
       <ol class="breadcrumb">
         <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Jenis Pelayanan</li>
+        <li class="active">Ruangan</li>
       </ol>
     </section>
 

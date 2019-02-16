@@ -4,9 +4,8 @@ include '../../config/koneksi.php';
 
 $ID 			= $_POST['id'];
 $nama			= $_POST['nama'];
-$expired		= $_POST['expired'];
 $jumlah			= $_POST['jumlah'];
-$satuan			= $_POST['satuan'];
+$harga			= $_POST['harga'];
 
 if (empty($jumlah)) {
 	$jumlah = 0;
@@ -20,10 +19,9 @@ if ($jumlah == 0) {
 
 $sql	= "UPDATE obat SET 
 			nama 		= '$nama',
-			expired 	= '$expired',
 			status		= '$status',
 			jumlah		= '$jumlah',
-			satuan		= '$satuan'
+			harga 		= '$harga'
 			WHERE id 	= '$ID'";
 
 mysqli_query($konek,$sql);

@@ -56,6 +56,7 @@
                   </span>
                 </a>
                 <ul class="treeview-menu">
+                  <li><a href="../tipe/"><i class="fa fa-circle-o"></i> Jenis Jabatan</a></li>
                   <li><a href="../jabatan/"><i class="fa fa-circle-o"></i> Jabatan</a></li>
                   <li><a href="../dokter/"><i class="fa fa-circle-o"></i> Dokter</a></li>
                   <li><a href="../staff/"><i class="fa fa-circle-o"></i> Staff</a></li>
@@ -70,8 +71,8 @@
                   </span>
                 </a>
                 <ul class="treeview-menu">
-                  <li><a href="../pengunjung/"><i class="fa fa-circle-o"></i> Pengunjung</a></li>
-                  <li><a href="../member/"><i class="fa fa-circle-o"></i> Member</a></li>
+                  <li><a href="../members/"><i class="fa fa-circle-o"></i> Data Pasien</a></li>
+                  <li><a href="../records/"><i class="fa fa-circle-o"></i> Rekam Medis</a></li>
                 </ul>
               </li>
               <li class="treeview">
@@ -103,9 +104,4 @@
                 </ul>
               </li>
             </ul>
-      
-
-
-                     
-    ?>
   </section>

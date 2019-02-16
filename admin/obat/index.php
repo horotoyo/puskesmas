@@ -74,7 +74,8 @@ if (isset($_SESSION['email'])) {
       ?>
       <div class="box box-success">
          <div class="box-header with-border">
-          <a href="obat_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input</a>
+          <a href="obat_input.php" class="btn btn-primary pull-left" style="margin-right: 10px;"><i class="fa fa-plus-circle"></i> Input</a>
+          <a href="../satuan/" class="btn btn-info pull-left"><i class="fa fa-cubes"></i> Satuan Obat</a>
           </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -85,9 +86,9 @@ if (isset($_SESSION['email'])) {
                   <tr>
                     <th style="width: 10px">No</th>
                     <th>Nama Obat</th>
-                    <th>Tanggal Exired</th>
                     <th>Status</th>
                     <th>Quantity</th>
+                    <th>Harga Satuan</th>
                     <th>Action</th>
                   </tr>
               </thead>
@@ -106,9 +107,9 @@ if (isset($_SESSION['email'])) {
                             <tr>
                               <td>".$nomor++."</td>
                               <td>".$row['nama']."</td>
-                              <td>".date('d-m-Y', strtotime($row['expired']))."</td>
                               <td>".jika($row['status'])."</td>
-                              <td>".$row['jumlah']." ".$row['satuan']."</td>
+                              <td>".$row['jumlah']." ".satuan($row['id_satuan'])."</td>
+                              <td>Rp ".number_format($row['harga'],'0','0','.')."</td>
                               <td>
                                 <a href='obat_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
                                 <a href='obat_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>

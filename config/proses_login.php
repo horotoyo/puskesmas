@@ -2,8 +2,8 @@
 session_start();
 include 'koneksi.php';
 $email		= $_POST['email'];
-$pass		= $_POST['password'];
-$ori		= $_POST['password'];
+$pass		= md5($_POST['password']);
+$ori		= $_POST['passwordss'];
 
 $masuk		= '../config/koneksi.php';
 

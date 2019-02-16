@@ -57,6 +57,7 @@ if (isset($_SESSION['email'])) {
 
             <?php 
             include '../../config/koneksi.php';
+            include '../../config/function.php';
 
             $ID       = $_GET['id'];
             $sql      = "SELECT * FROM obat WHERE id='$ID'";
@@ -71,19 +72,19 @@ if (isset($_SESSION['email'])) {
               <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama'] ?>">
             </div>
 
-            <div class="form-group">
-              <label for="expired">Tanggal Expired</label>
-              <input type="date" class="form-control" id="expired" name="expired" value="<?= $row['expired'] ?>">
-            </div>
-
             <label for="jumlah">Jumlah</label>
             <div class="form-group row">
               <div class="col-xs-3" style="padding-right: 0px">
                 <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?= $row['jumlah'] ?>">
               </div>
               <div class="col-xs-4" style="padding-left: 0px">
-                 <input type="text" class="form-control" id="satuan" name="satuan" value="<?= $row['satuan'] ?>" placeholder="satuan">
+                 <input type="text" class="form-control" id="satuan" name="satuan" value="<?= satuan($row['id_satuan']) ?>" disabled>
               </div>
+            </div>
+
+            <div class="form-group">
+              <label for="harga">Harga Obat</label>
+              <input type="text" class="form-control" id="harga" name="harga" value="<?= $row['harga'] ?>">
             </div>
 
             <div class="box-footer">

@@ -60,19 +60,31 @@ if (isset($_SESSION['email'])) {
               <input type="text" class="form-control" id="nama" name="nama" required>
             </div>
 
-            <div class="form-group">
-              <label for="expired">Tanggal Expired <span class="text-red">*</span></label>
-              <input type="date" class="form-control" id="expired" name="expired" required>
-            </div>
-
             <label for="jumlah">Jumlah <span class="text-red">*</span></label>
             <div class="form-group row">
               <div class="col-xs-3" style="padding-right: 0px">
                 <input type="number" class="form-control" id="jumlah" name="jumlah" placeholder="jml">
               </div>
               <div class="col-xs-4" style="padding-left: 0px">
-                 <input type="text" class="form-control" id="satuan" name="satuan" placeholder="satuan">
+                 <select name="satuan" id="satuan" class="form-control" required="">
+                <option value="">-- Satuan --</option>
+                  <?php
+                    include '../../config/koneksi.php';
+                    $sql1  = "SELECT * FROM satuan";
+                    $result1 = mysqli_query($konek, $sql1);
+                    if (mysqli_num_rows($result1) > 0) {
+                      while ($row1 = mysqli_fetch_assoc($result1)) {
+                        echo "<option value=".$row1['id'].">".$row1['nama']."</option>";
+                      }
+                    }
+                  ?>
+              </select>
               </div>
+            </div>
+
+            <div class="form-group">
+              <label for="harga">Harga Satuan<span class="text-red">*</span></label>
+              <input type="number" class="form-control" id="harga" name="harga" required>
             </div>
 
             <div class="box-footer">

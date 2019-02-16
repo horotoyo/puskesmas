@@ -598,10 +598,20 @@
 					$nama		= (isset($_POST ['nama'])?$_POST ['nama']:"");
 					$email 		= (isset($_POST ['email'])?$_POST ['email']:"");
 					$isi 		= (isset($_POST ['isi'])?$_POST ['isi']:"");
-					$tanggal 	= date("Y-m-d");
+					$tanggal 	= date("Y-m-d H:i:s");
+
+					if (empty($nama)) {
+						if (empty($email)) {
+							if ($isi) {
+								exit();
+							}
+						}
+					} else {
+						$sql = "INSERT INTO pesan (nama, email, isi, tanggal) VALUES ('$nama', '$email', '$isi', '$tanggal')";
+						mysqli_query($konek,$sql);
+					}
+
 					
-					$sql = "INSERT INTO pesan (nama, email, isi, tanggal) VALUES ('$nama', '$email', '$isi', '$tanggal')";
-					mysqli_query($konek,$sql);
 					?>
 				<!-- /contact form -->
 

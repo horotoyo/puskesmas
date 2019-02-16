@@ -85,7 +85,7 @@ if (isset($_SESSION['email'])) {
                   <tr>
                     <th style="width: 10px">No</th>
                     <th>Jabatan</th>
-                    <th>Status</th>
+                    <th>Jenis Jabatan</th>
                     <th>Action</th>
                   </tr>
               </thead>
@@ -103,7 +103,7 @@ if (isset($_SESSION['email'])) {
                             <tr>
                               <td>".$nomor++."</td>
                               <td>".$row['nama']."</td>
-                              <td>".job($row['jenis'])."</td>
+                              <td>".job($row['id_jenis'])."</td>
                               <td>
                                 <a href='jabatan_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
                                 <a href='jabatan_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>

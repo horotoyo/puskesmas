@@ -25,11 +25,22 @@ function role($id) {
 	return $row['nama'];
 }
 
+function satuan($id) {
+	global $konek;
+	$sql   		= "SELECT nama FROM satuan WHERE id=".$id;
+	$result   	= mysqli_query($konek, $sql);
+	$row	   	= mysqli_fetch_assoc($result);
+	return $row['nama'];
+}
+
+
 function job($status) {
-	if ($status==0) {
-		return "<span class='label label-primary'>Tenaga Medis</span>";
+	if ($status==1) {
+		return "Staff";
+	} elseif ($status==2) {
+		return "Tenaga Medis";
 	} else {
-		return "<span class='label label-success'>Staff</span>";
+		return "Tukang";
 	}
 }
 

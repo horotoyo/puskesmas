@@ -29,6 +29,9 @@
   <link rel="stylesheet" href="../../AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
   <!-- Pop-up detail css -->
   <link rel="stylesheet" type="text/css" href="../../css/popup.css">
+  <!-- select2 css -->
+  <link href="../../css/select2.min.css" rel="stylesheet" />
+
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

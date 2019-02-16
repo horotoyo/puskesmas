@@ -1,5 +1,15 @@
 <!-- jQuery 3 -->
 <script src="../../AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../js/select2.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#wilker').select2({
+      placeholder: 'Input Nama Pasien'
+    });
+  });
+  
+</script>
+
 <!-- jQuery UI 1.11.4 -->
 <script src="../../AdminLTE-2.4.5/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -30,8 +40,7 @@
 <!-- Slimscroll -->
 <script src="../../AdminLTE-2.4.5/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../AdminLTE-2.4.5/dist/js/adminlte.min.js?v=1.0"></script>
-<script src="../../AdminLTE-2.4.5/dist/js/adminlte.min.js?v=1.2"></script>
+<script src="../../AdminLTE-2.4.5/dist/js/adminlte.min.js"></script>
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../../AdminLTE-2.4.5/dist/js/pages/dashboard.js"></script>

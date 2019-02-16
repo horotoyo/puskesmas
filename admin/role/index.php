@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Jenis Pelayanan</title>
+  <title>Role</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -59,7 +59,7 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Daftar User
+        Daftar Role
       </h1>
       <ol class="breadcrumb">
         <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -74,7 +74,7 @@ if (isset($_SESSION['email'])) {
       ?>
       <div class="box box-success">
          <div class="box-header with-border">
-          <a href="user_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input</a>
+          <a href="role_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input</a>
           </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -104,8 +104,8 @@ if (isset($_SESSION['email'])) {
                               <td>".$nomor++."</td>
                               <td>".$row['nama']."</td>
                               <td>
-                                <a href='user_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                <a href='user_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
+                                <a href='role_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
+                                <a href='role_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
                               </td>
                             </tr>
                           ";

@@ -83,7 +83,9 @@ if (isset($_SESSION['email'])) {
                     <th style="width: 10px">No</th>
                     <th>Nama</th>
                     <th>Email</th>
-                    <th>isi</th>
+                    <th>Isi</th>
+                    <th>Tanggal</th>
+                    <th>Jam</th>
                     <th>Action</th>
                   </tr>
               </thead>
@@ -103,8 +105,9 @@ if (isset($_SESSION['email'])) {
                               <td>".$row['nama']."</td>
                               <td>".$row['email']."</td>
                               <td>".$row['isi']."</td>
+                              <td>".date('d-m-Y', strtotime($row['tanggal']))."</td>
+                              <td>".date('H:i', strtotime($row['tanggal']))." WIB"."</td>
                               <td>
-                                <a href='pesan_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
                                 <a href='pesan_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
                               </td>
                             </tr>
