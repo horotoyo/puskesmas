@@ -3,7 +3,7 @@ session_start();
 include 'koneksi.php';
 $email		= $_POST['email'];
 $pass		= md5($_POST['password']);
-$ori		= $_POST['passwordss'];
+$ori		= $_POST['password'];
 
 $masuk		= '../config/koneksi.php';
 
@@ -33,10 +33,10 @@ if(!empty($email) && !empty($pass)) {
 		header('location: ../admin/home/index.php');
 
 	} else {
-		echo "Email anda salah";
+		header('location: ../admin/layout/danger.php');
 	}
 } else {
-	echo "Email dan password anda kosong";
+	header('location: ../admin/layout/warning.php');
 }
 
 ?>

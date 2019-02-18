@@ -47,7 +47,7 @@
                   <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
               </li>
-              <li class="<?php if($get === "tipe" OR $get === "jabatan" OR $get === "doker" OR $get === "staff") {echo "treeview active menu-open";} else {echo "treeview";}?>">
+              <li class="<?php if($get === "tipe" OR $get === "jabatan" OR $get === "dokter" OR $get === "staff") {echo "treeview active menu-open";} else {echo "treeview";}?>">
                 <a href="#">
                   <i class="fa fa-user-md"></i>
                   <span>Pegawai</span>

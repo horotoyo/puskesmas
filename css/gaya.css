@@ -1,0 +1,24 @@
+/*
+ * Component: Form
+ * ---------------
+ */
+.banyak {
+  border-radius: 0;
+  box-shadow: none;
+  border-color: #d2d6de;
+}
+.banyak:focus {
+  border-color: #3c8dbc;
+  box-shadow: none;
+}
+.banyak::-moz-placeholder,
+.banyak:-ms-input-placeholder,
+.banyak::-webkit-input-placeholder {
+  color: #bbb;
+  opacity: 1;
+}
+.banyak:not(select) {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

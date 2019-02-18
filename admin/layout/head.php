@@ -1,3 +1,5 @@
+  <link href="../../css/select2.min.css" rel="stylesheet" />
+  <link href="../../css/gaya.css" rel="stylesheet" />
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/png" href="../../favicon.png"/>
   <!-- Tell the browser to be responsive to screen width -->
@@ -27,15 +29,3 @@
   <link rel="stylesheet" href="../../AdminLTE-2.4.5/plugins/iCheck/all.css">
     <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="../../AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-  <!-- Pop-up detail css -->
-  <link rel="stylesheet" type="text/css" href="../../css/popup.css">
-  <!-- select2 css -->
-  <link href="../../css/select2.min.css" rel="stylesheet" />
-
-
-  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->

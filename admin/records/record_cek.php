@@ -8,63 +8,24 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Pasien Terdaftar</title>
+  <title>Rekam Medis | Input</title>
+
  <?php
  include '../layout/head.php';
  ?>
-   <style>
-    .example-modal .modal {
-      position: relative;
-      top: auto;
-      bottom: auto;
-      right: auto;
-      left: auto;
-      display: block;
-      z-index: 1;
-    }
-
-    .example-modal .modal {
-      background: transparent !important;
-    }
-  </style>
 </head>
 <body class="hold-transition skin-green fixed sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><img src="../../favicon.png" width="20px"></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>E</b>-Puskesmas</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <?php
-          include '../layout/massage.php';
-          include '../layout/notification.php';
-          include '../layout/tasks.php';
-          include '../layout/user.php';
-          ?>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <?php
+    include '../layout/header.php';
+    ?>
   </header>
+
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-      <?php
+     <?php
      include '../layout/sidebar.php';
      ?>
   </aside>
@@ -74,149 +35,146 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Pasien Terdaftar
+        Cek Data 
+        <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Pasien Terdaftar</li>
+        <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="index.php"> Rekam Medis</a></li>
+        <li class="active">Input Rekam Medis</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <?php
-      include '../layout/popup.php';
-      ?>
+
+    <div class="row">
+      <div class="col-md-4">
       <div class="box box-success">
-         <div class="box-header with-border">
-          <a href="member_input.php" class="btn btn-primary pull-left" style="margin-right: 15px;"><i class="fa fa-plus-circle"> Pasien Baru</i></a>
-          </div>
-            <!-- /.box-header -->
-            <div class="box-body">
+        <div class="box-header with-border">
+          <h3 class="box-title">Cek Data Pasien</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" method="POST"">
+          <div class="box-body">
 
-            <table id="example1" class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <tr>
-                    <th style="width: 10px">No</th>
-                    <th>No Pasien</th>
-                    <th>Nama Pasien</th>
-                    <th>No Hp/Telp.</th>
-                    <th>Tanggal Pendaftaran</th>
-                    <th>Action</th>
-                  </tr>
-              </thead>
-                <?php
-                  include '../../config/koneksi.php';
-                  include '../../config/function.php';
 
-                  $nomor  = 1;
-
-                  $sql    = "SELECT * FROM members ORDER BY id ASC";
-                  $result = mysqli_query($konek, $sql);
-
-                  if (mysqli_num_rows($result)>0) {
-                        while ($row = mysqli_fetch_assoc($result)){
-                          echo "
-                            <tr>
-                              <td>".$nomor++."</td>
-                              <td>".$row['id']."</td>
-                              <td>".$row['nama']."</td>
-                              <td>".$row['telp']."</td>
-                              <td>".date('d F Y', strtotime($row['tanggal_pendaftaran']))."</td>
-                              <td>
-                                <button type='button' class='btn btn-info btn-xs' data-toggle='modal' data-target='#modal-default'> Detail </button>
-                                <a href='member_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                <a href='member_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                              </td>
-                            </tr>
-                          ";
-                        }
-                      } else {
-                        echo "
-                          <tr>
-                            <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                          </tr>
-                        ";
-                      }
-                 
-                  ?>
-              </table>
-              <div class="modal fade" id="modal-default">
-                <div class="modal-dialog" style="width: 650px; margin: 80px 20px 10px 430px;">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">Data Pasien</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="form-group">
-                        <table>
-                          <tr>
-                            <td style="width: 100px"><label>No Pasien</label></td>
-                            <td>:</td>
-                            <td><?=$row['nama']?></td>
-                          </tr>
-                          <tr>
-                            <td><label>Nama Pasien</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>TTL</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Alamat</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>No. HP/Telp</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Gol Darah</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Jenis Kelamin</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Tgl Registrasi</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success">Edit Data</button>
-                    </div>
-                  </div>
-                  <!-- /.modal-content -->
+                <div class="form-group">
+                  <label for="nip">Nomor Index Pasien<span class="text-red">*</span></label>
+                  <input type="text" class="form-control" id="nip" name="nip" placeholder="@ex: 110-0001" >
                 </div>
-                <!-- /.modal-dialog -->
-              </div>
-              <!-- /.modal -->
 
-            </div>
-            <!-- /.box-body -->
+                <div class="form-group">
+                  <label for="nama">Nama Pasien<span class="text-red">*</span></label>
+                  <input type="text" class="form-control" id="nama" name="nama" placeholder="@ex: Suryo Widiyanto" >
+                </div>
+
+                <div class="form-group">
+                <?php
+                include '../../config/koneksi.php';
+                $nama   = (isset($_POST ['nama'])?$_POST ['nama']:"");
+                $nip    = (isset($_POST ['nip'])?$_POST ['nip']:"");
+                $sql    = "SELECT * FROM members WHERE id='$nip' AND nama='$nama'";
+                $result = mysqli_query($konek, $sql);
+                $row    = mysqli_fetch_row($result);
+                $_SESSION['id_pasien']    = $row[0];
+                $_SESSION['nama_pasien']  = $row[1];
+
+                if ((empty($nama)) AND (empty($nip))) {
+                  echo "";
+                } elseif ((empty($_SESSION['id_pasien'])) AND (empty($_SESSION['nama_pasien']))) {
+                  echo "
+                        <div class='callout callout-warning jika'>
+                        <p>Pasien belum terdaftar 
+                          <a href='../members/member_input.php' class='btn btn-primary btn-xs' style='text-decoration:none; margin-left:10px;'>
+                          Daftarkan Pasien</a>
+                        </p>
+                        </div>
+                  ";
+                } else {
+                  echo "
+                        <div class='callout callout-success jika'>
+                        <p>Pasien sudah terdaftar</p>
+                        </div>
+                  ";
+                }
+                ?>
+                </div>
+
+                <div class="box-footer">
+                  <a type="reset" class="btn btn-default" href="index.php">Cancel</a>
+                  <button type="submit" class="btn btn-success pull-right">Cek</button>
+                </div>
+
+
+
+          </div>
+        </form>           
+      </div> <!-- box succeess -->
+    </div> <!-- md6 -->
+  
+    <div class="col-md-8">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Data Pasien</h3>
+        </div>
+        <div class="box-body">
+          <div class="form-group">
+            <label>Nomor Index Pasien : </label>
+            <div class="form-control"><?= $row[0]?></div>
+          </div>
+          <div class="form-group">
+            <label>Nama Pasien : </label>
+            <div class="form-control"><?= $row[1] ?></div>
+          </div>
+          <div class="form-group">
+            <label>Tempat, Tanggal Lahir : </label>
+            <div class="form-control"><?= $row[2].", ".date('d F Y', strtotime($row[3])) ?></div>
+          </div>
+          <div class="form-group">
+            <label>Alamat : </label>
+            <div class="form-control"><?= $row[4] ?></div>
+          </div>
+          <div class="form-group">
+            <label>No Telp : </label>
+            <div class="form-control"><?= $row[5] ?></div>
+          </div>
+
+          <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Golongan Darah : </label>
+            <div class="form-control"><?= $row[6] ?></div>
+          </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Jenis Kelamin : </label>
+            <div class="form-control"><?= $row[7] ?></div>
+          </div>
+          </div>
+          </div>
+
+      </div>
+
+       <div class="box-footer">
+        <a href="record_input.php" class="btn btn-success pull-right">Next</a>
+       </div>
+      </div>
+    </div>
+
+    </div> <!-- row -->
+
+      
 
     </section>
     <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
 <?php 
 include '../layout/footer.php';
 ?>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -410,13 +368,13 @@ include '../layout/footer.php';
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+
+
 </div>
 <!-- ./wrapper -->
-
 <?php
 include '../layout/script.php';
 ?>
-
 </body>
 </html>
 

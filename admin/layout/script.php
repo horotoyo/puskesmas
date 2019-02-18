@@ -1,12 +1,12 @@
+
 <!-- jQuery 3 -->
 <script src="../../AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="../../js/select2.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $('#wilker').select2({
-      placeholder: 'Input Nama Pasien'
-    });
-  });
+  
+  function load_select2() {
+    $('.banyak').select2();
+  }
   
 </script>
 

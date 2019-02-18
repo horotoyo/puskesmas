@@ -9,7 +9,6 @@ if (isset($_SESSION['email'])) {
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Rekam Medis | Input</title>
-
  <?php
  include '../layout/head.php';
  ?>
@@ -35,11 +34,11 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Input 
+        Input
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../home/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="index.php"> Rekam Medis</a></li>
         <li class="active">Input Rekam Medis</li>
       </ol>
@@ -59,63 +58,91 @@ if (isset($_SESSION['email'])) {
             <div class="row">
               <div class="col-md-6">
 
-                <div class="form-group">
-                  <label for="nama">Nama Pasien<span class="text-red">*</span></label>
-                  <input type="text" class="form-control" id="nama" name="nama" placeholder="@ex: Suryo Widiyanto" required>
+                <div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>No Pasien</label>
+                    <div class="form-control"><?= $_SESSION['id_pasien'] ?></div>
+                  </div>
+                  </div>
+                  <div class="col-md-9">
+                    <div class="form-group">
+                      <label>Nama Pasien</label>
+                    <div class="form-control"><?= $_SESSION['nama_pasien'] ?></div>
+                  </div>
+                  </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="tmp_lahir">Tempat Lahir<span class="text-red">*</span></label>
-                  <input type="text" class="form-control" id="tmp_lahir" name="tmp_lahir" placeholder="@ex: Gunungkidul" required>
+                  <label for="keluhan">Keluhan</label>
+                  <input type="text" class="form-control" id="keluhan" name="keluhan" placeholder="Sakit Kepala, Muntah muntah, dll" required>
                 </div>
 
                 <div class="form-group">
-                  <label for="tgl_lahir">Tanggal Lahir<span class="text-red">*</span></label>
-                  <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
+                  <label for="plyn">Pelayanan</label>
+                  <select name="plyn" id="plyn" class="form-control" required>
+                  <option value="">-- Pilih Pelayanan --</option>
+                    <?php
+                      include '../../config/koneksi.php';
+                      $sql1    = "SELECT * FROM layanan";
+                      $result1 = mysqli_query($konek, $sql1);
+                      if (mysqli_num_rows($result1) > 0) {
+                        while ($row1 = mysqli_fetch_assoc($result1)) {
+                          echo "<option value=".$row1['id'].">".$row1['nama']."</option>";
+                        }
+                      }
+                    ?>
+                </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="dokter">Dokter</label>
+                  <select name="dokter" id="dokter" class="form-control" required>
+                  <option value="">-- Pilih Dokter --</option>
+                    <?php
+                      include '../../config/koneksi.php';
+                      $sql2    = "SELECT * FROM dokter";
+                      $result2 = mysqli_query($konek, $sql2);
+                      if (mysqli_num_rows($result2) > 0) {
+                        while ($row2 = mysqli_fetch_assoc($result2)) {
+                          echo "<option value=".$row2['id'].">".$row2['nama']."</option>";
+                        }
+                      }
+                    ?>
+                </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="ruang">Ruangan</label>
+                  <select name="ruang" id="ruang" class="form-control" required>
+                  <option value="">-- Pilih Ruangan --</option>
+                    <?php
+                      include '../../config/koneksi.php';
+                      $sql3    = "SELECT * FROM ruangan";
+                      $result3 = mysqli_query($konek, $sql3);
+                      if (mysqli_num_rows($result3) > 0) {
+                        while ($row3 = mysqli_fetch_assoc($result3)) {
+                          echo "<option value=".$row3['id'].">".$row3['nama']."</option>";
+                        }
+                      }
+                    ?>
+                </select>
                 </div>
 
               </div>
 
+              <div class="col-md-6 bungkus">
+                <div class="form-group">
+                <label for="obat" style="width: 100%">Obat</label>
+                <?php include 'obat.php'; ?>
+              </div>
+
+                              
+              </div>
               <div class="col-md-6">
-
-                <div class="form-group">
-                  <label for="alamat">Alamat<span class="text-red">*</span></label>
-                  <input type="text" class="form-control" id="alamat" name="alamat" placeholder="@ex: Bleberan, Bleberan, Playen, Gunungkidul" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="telp">No. Hp/Telp<span class="text-red">*</span></label>
-                  <input type="text" class="form-control" id="telp" name="telp" placeholder="@ex: 081876398229" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="gol">Golongan Darah<span class="text-red">*</span></label>
-                  <select name="gol" id="gol" class="form-control" required="">
-                    <option value="">-- Golongan Darah --</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="AB">AB</option>
-                    <option value="O">O</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label style="margin-bottom: 0px;">Jenis Kelamin<span class="text-red">*</span></label>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="jk" id="lk" value="Laki Laki">
-                      Laki Laki
-                    </label>
-                  </div>
-                  <div class="radio">
-                    <label>
-                      <input type="radio" name="jk" id="pr" value="Perempuan">
-                      Perempuan
-                    </label>
-                  </div>
-                </div>
-
+              <a id="addobat" class="btn btn-success pull-left"><i class="fa fa-plus-circle"></i> Tambah Obat</a>
               </div>
+              
             </div>
         
           <div class="box-footer">
@@ -331,6 +358,20 @@ include '../layout/footer.php';
 
 </div>
 <!-- ./wrapper -->
+
+<script src="../../js/jquery-3.3.1.js"></script>
+<?php include 'select.php'; ?>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    load_select2();
+    $("#addobat").click(function(){
+      $(".bungkus").append("<div class='form-group'><div class='row'><div class='col-md-5'><select name='obat[]' class='banyak form-control' style='width: 100%;' required><option value=''>-- Pilih Obat --</option><?php include '../../config/koneksi.php' ;$sql4    = 'SELECT * FROM obat'; $result4 = mysqli_query($konek, $sql4); if (mysqli_num_rows($result4) > 0) {while ($row4 = mysqli_fetch_assoc($result4)) {echo '<option value='.$row4['id'].'>'.$row4['nama'].'</option>';}}?></select></div><div class='col-md-3'><input type='number' class='form-control' name='jml[]' placeholder='jumlah'>  </div><div class='col-md-3'><select name='satuan[]' class='form-control' style='width: 100%;' required><option value=''>-- Satuan --</option><?php include '../../config/koneksi.php'; $sql5    = 'SELECT * FROM satuan'; $result5 = mysqli_query($konek, $sql5); if (mysqli_num_rows($result5) > 0) { while ($row5 = mysqli_fetch_assoc($result5)) { echo '<option value='.$row5['id'].'>'.$row5['nama'].'</option>';}}?></select></div></div></div>");
+        load_select2();
+    });
+
+  });
+</script>
 <?php
 include '../layout/script.php';
 ?>

@@ -62,7 +62,7 @@ if (isset($_SESSION['email'])) {
         Rekam Medis
       </h1>
       <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="../home/"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Rekam Medis</li>
       </ol>
     </section>
@@ -74,7 +74,7 @@ if (isset($_SESSION['email'])) {
       ?>
       <div class="box box-success">
          <div class="box-header with-border">
-          <a href="record_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Data</a>
+          <a href="record_cek.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Data</a>
           </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -85,9 +85,9 @@ if (isset($_SESSION['email'])) {
                   <tr>
                     <th style="width: 10px">No</th>
                     <th>Nama Pasien</th>
-                    <th>No Antri</th>
                     <th>Tanggal Masuk</th>
                     <th>Keluhan</th>
+                    <th>Jenis Pelayanan</th>
                     <th>Action</th>
                   </tr>
               </thead>
@@ -106,9 +106,9 @@ if (isset($_SESSION['email'])) {
                             <tr>
                               <td>".$nomor++."</td>
                               <td>".$row['id_member']."</td>
-                              <td>".$row['no_antri']."</td>
                               <td>".$row['tanggal_masuk']."</td>
                               <td>".$row['keluhan']."</td>
+                              <td>".$row['id_layanan']."</td>
                               <td>
                                 <a href='member_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
                                 <a href='member_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
