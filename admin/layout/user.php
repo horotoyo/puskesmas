@@ -29,7 +29,7 @@ $row    = mysqli_fetch_assoc($result);
 
                 <p>
                   <?php echo $row['nama']?>
-                  <small>Member since Nov. 2012</small>
+                  <small>User Puskesmas</small>
                 </p>
               </li>
 

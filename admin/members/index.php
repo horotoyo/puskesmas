@@ -32,35 +32,9 @@ if (isset($_SESSION['email'])) {
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><img src="../../favicon.png" width="20px"></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>E</b>-Puskesmas</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <?php
-          include '../layout/massage.php';
-          include '../layout/notification.php';
-          include '../layout/tasks.php';
-          include '../layout/user.php';
-          ?>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+ <?php
+ include '../layout/header.php';
+ ?>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
@@ -90,6 +64,7 @@ if (isset($_SESSION['email'])) {
       <div class="box box-success">
          <div class="box-header with-border">
           <a href="member_input.php" class="btn btn-primary pull-left" style="margin-right: 15px;"><i class="fa fa-plus-circle"> Pasien Baru</i></a>
+          <a href="member_print.php" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>
           </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -125,9 +100,9 @@ if (isset($_SESSION['email'])) {
                               <td>".$row['telp']."</td>
                               <td>".date('d F Y', strtotime($row['tanggal_pendaftaran']))."</td>
                               <td>
-                                <button type='button' class='btn btn-info btn-xs' data-toggle='modal' data-target='#modal-default'> Detail </button>
-                                <a href='member_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                <a href='member_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
+                                <a data-toggle='tooltip' title='Detail'><button type='button' class='btn btn-info btn-xs' data-toggle='modal' data-target='#modal-default'><i class='fa fa-search'></i></button></a>
+                                <a href='member_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs' data-toggle='tooltip' title='Edit'><i class='fa fa-pencil'></i></a>
+                                <a href='member_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs' data-toggle='tooltip' title='Delete'><i class='fa fa-trash'></i></a>
                               </td>
                             </tr>
                           ";

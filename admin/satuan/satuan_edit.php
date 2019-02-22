@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Jabatan | Input</title>
+  <title>Satuan | Input</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -34,13 +34,13 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Jabatan
+        Satuan
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="index.php"> Jabatan</a></li>
-        <li class="active">Input Jabatan</li>
+        <li><a href="index.php"> Satuan</a></li>
+        <li class="active">Input Satuan</li>
       </ol>
     </section>
 
@@ -48,16 +48,26 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box box-success">
         <div class="box-header with-border">
-          <h3 class="box-title">Input Jabatan</h3>
+          <h3 class="box-title">Input Satuan</h3>
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" action="jabatan_input_proses.php" method="POST"">
+        <form role="form" action="satuan_edit_proses.php" method="POST"">
+          <?php 
+           include '../../config/koneksi.php';
+
+           $ID       = $_GET['id'];
+           $sql      = "SELECT * FROM satuan WHERE id='$ID'";
+           $result   = mysqli_query($konek, $sql);
+           $row      = mysqli_fetch_assoc($result);
+
+          ?>
           <div class="box-body">
 
             <div class="form-group">
-              <label for="nama">Jabatan <span class="text-red">*</span></label>
-              <input type="text" class="form-control" id="nama" name="nama" required>
+            <input type="hidden" name="id" value="<?php echo $ID; ?>">
+              <label for="nama">Nama Satuan<span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama']?>">
             </div>
 
             <div class="box-footer">

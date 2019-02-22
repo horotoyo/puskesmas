@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Jenis Jabatan</title>
+  <title>Jabatan | Input</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -17,13 +17,14 @@ if (isset($_SESSION['email'])) {
 <div class="wrapper">
 
   <header class="main-header">
- <?php
- include '../layout/header.php';
- ?>
+    <?php
+    include '../layout/header.php';
+    ?>
   </header>
+
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-      <?php
+     <?php
      include '../layout/sidebar.php';
      ?>
   </aside>
@@ -33,143 +34,68 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Daftar Jenis Jabatan
+        Jabatan
+        <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Jenis Jabatan</li>
+        <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="index.php"> Jabatan</a></li>
+        <li class="active">Input Jabatan</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <!-- Custom Tabs -->
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Jenis Jabatan</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Nama Jabatan</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-                <div class="section">
-                  <div class="box-header with-border">
-                    <a href="tipe_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Jenis Jabatan</a>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <tr>
-                            <th style="width: 10px">No</th>
-                            <th>Jenis Jabatan</th>
-                            <th>Action</th>
-                          </tr>
-                      </thead>
-                        <?php
-                          include '../../config/koneksi.php';
-                          include '../../config/function.php';
-                          $no_jenis  = 1;
-                          $no_jab    = 1;
-                          $sql    = "SELECT * FROM jenis_jabatan";
-                          $result = mysqli_query($konek, $sql);
-
-                          $sql2    = "SELECT * FROM jabatan";
-                          $result2 = mysqli_query($konek, $sql2);
-
-                          if (mysqli_num_rows($result)>0) {
-                                while ($row = mysqli_fetch_assoc($result)){
-                                  echo "
-                                    <tr>
-                                      <td>".$no_jenis++."</td>
-                                      <td>".$row['nama']."</td>
-                                      <td>
-                                        <a href='tipe_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                        <a href='tipe_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                                      </td>
-                                    </tr>
-                                  ";
-                                }
-                              } else {
-                                echo "
-                                  <tr>
-                                    <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                                  </tr>
-                                ";
-                              }
-                         
-                          ?>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2">
-                <div class="section">
-                  <div class="box-header with-border">
-                    <a href="jabatan_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Nama Jabatan</a>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example1" class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <tr>
-                            <th style="width: 10px">No</th>
-                            <th>Jabatan</th>
-                            <th>Jenis Jabatan</th>
-                            <th>Action</th>
-                          </tr>
-                      </thead>
-                      <?php
-                        if (mysqli_num_rows($result2)>0) {
-                          while ($row2 = mysqli_fetch_assoc($result2)){
-                            echo "
-                              <tr>
-                                <td>".$no_jab++."</td>
-                                <td>".$row2['nama']."</td>
-                                <td>".job($row2['id_jenis'])."</td>
-                                <td>
-                                  <a href='jabatan_edit.php?id=".$row2['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                  <a href='jabatan_delete.php?id=".$row2['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                                </td>
-                              </tr>
-                            ";
-                          }
-                        } else {
-                          echo "
-                            <tr>
-                              <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                            </tr>
-                          ";
-                        }
-                      ?>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- nav-tabs-custom -->
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Input Nama Jabatan</h3>
         </div>
-        <!-- /.col -->
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="jabatan_input_proses.php" method="POST"">
+          <div class="box-body">
 
-        <!-- /.col -->
+            <div class="form-group">
+              <label for="nama">Nama Jabatan <span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="nama" name="nama" required>
+            </div>
+
+            <div class="form-group">
+              <label for="jenis">Jenis Jabatan <span class="text-red">*</span></label>
+                <select name="jenis" id="jenis" class="form-control" required>
+                  <option value="">-- Pilih Jenis Jabatan --</option>
+                    <?php
+                      include '../../config/koneksi.php';
+                      $sql1    = "SELECT * FROM jenis_jabatan";
+                      $result1 = mysqli_query($konek, $sql1);
+                      if (mysqli_num_rows($result1) > 0) {
+                        while ($row1 = mysqli_fetch_assoc($result1)) {
+                          echo "<option value=".$row1['id'].">".$row1['nama']."</option>";
+                        }
+                      }
+                    ?>
+                </select>
+            </div>
+
+            <div class="box-footer">
+                <a type="reset" class="btn btn-default" href="index.php">Cancel</a>
+                <button type="submit" class="btn btn-success pull-right">Input</button>
+            </div>
+
+
+        </div>
+        </form>
+
+           
       </div>
-      
-            <!-- /.box-body -->
-
+       <!-- /.box -->
     </section>
     <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
 <?php 
 include '../layout/footer.php';
 ?>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -363,18 +289,19 @@ include '../layout/footer.php';
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+
+
 </div>
 <!-- ./wrapper -->
 
 <?php
 include '../layout/script.php';
 ?>
-
 </body>
 </html>
 
 <?php
 } else {
-  echo "Anda belum login, silahkan <a href='../../login.php'>Login</a>";
+  echo "Anda belum login, silahkan <a href='../index.php'>Login</a>";
 }
 ?>

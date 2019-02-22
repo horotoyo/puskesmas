@@ -1,6 +1,14 @@
 <?php
 include 'koneksi.php';
 
+function user($id) {
+	global $konek;
+	$sql   		= "SELECT nama FROM members WHERE id='$id'";
+	$result   	= mysqli_query($konek, $sql);
+	$row	   	= mysqli_fetch_assoc($result);
+	return $row['nama'];
+}
+
 function jabatan($id) {
 	global $konek;
 	$sql   		= "SELECT nama FROM jabatan WHERE id=".$id;
@@ -17,6 +25,23 @@ function pelayanan($id) {
 	return $row['nama'];
 }
 
+function ruang($id) {
+	global $konek;
+	$sql   		= "SELECT nama FROM ruangan WHERE id=".$id;
+	$result   	= mysqli_query($konek, $sql);
+	$row	   	= mysqli_fetch_assoc($result);
+	return $row['nama'];
+}
+
+function dokter($id) {
+	global $konek;
+	$sql   		= "SELECT nama FROM dokter WHERE id=".$id;
+	$result   	= mysqli_query($konek, $sql);
+	$row	   	= mysqli_fetch_assoc($result);
+	return $row['nama'];
+}
+
+
 function role($id) {
 	global $konek;
 	$sql   		= "SELECT nama FROM role WHERE id=".$id;
@@ -31,6 +56,22 @@ function satuan($id) {
 	$result   	= mysqli_query($konek, $sql);
 	$row	   	= mysqli_fetch_assoc($result);
 	return $row['nama'];
+}
+
+function obat($id) {
+	global $konek;
+	$sql   		= "SELECT nama FROM obat WHERE id='$id'";
+	$result   	= mysqli_query($konek, $sql);
+	$row	   	= mysqli_fetch_assoc($result);
+	return $row['nama'];
+}
+
+function harga($id) {
+	global $konek;
+	$sql   		= "SELECT harga FROM obat WHERE id='$id'";
+	$result   	= mysqli_query($konek, $sql);
+	$row	   	= mysqli_fetch_assoc($result);
+	return $row['harga'];
 }
 
 

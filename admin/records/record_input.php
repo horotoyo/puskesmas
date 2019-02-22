@@ -63,6 +63,7 @@ if (isset($_SESSION['email'])) {
                     <div class="form-group">
                       <label>No Pasien</label>
                     <div class="form-control"><?= $_SESSION['id_pasien'] ?></div>
+                    <input type="hidden" name="nomor" value="<?= $_SESSION['id_pasien'] ?>">
                   </div>
                   </div>
                   <div class="col-md-9">
@@ -134,7 +135,7 @@ if (isset($_SESSION['email'])) {
               <div class="col-md-6 bungkus">
                 <div class="form-group">
                 <label for="obat" style="width: 100%">Obat</label>
-                <?php include 'obat.php'; ?>
+                <?php include 'record_obat.php'; ?>
               </div>
 
                               

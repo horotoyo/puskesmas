@@ -47,17 +47,16 @@
                   <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
               </li>
-              <li class="<?php if($get === "tipe" OR $get === "jabatan" OR $get === "dokter" OR $get === "staff") {echo "treeview active menu-open";} else {echo "treeview";}?>">
+              <li class="<?php if($get === "tipe" OR $get === "dokter" OR $get === "staff") {echo "treeview active menu-open";} else {echo "treeview";}?>">
                 <a href="#">
                   <i class="fa fa-user-md"></i>
-                  <span>Pegawai</span>
+                  <span>Kepegawaian</span>
                   <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
                 </a>
                 <ul class="treeview-menu">
-                  <li class="<?php if($get === "tipe") {echo "active";} else {echo "";}?>"><a href="../tipe/"><i class="fa fa-circle-o"></i> Jenis Jabatan</a></li>
-                  <li class="<?php if($get === "jabatan") {echo "active";} else {echo "";}?>"><a href="../jabatan/"><i class="fa fa-circle-o"></i> Jabatan</a></li>
+                  <li class="<?php if($get === "tipe") {echo "active";} else {echo "";}?>"><a href="../tipe/"><i class="fa fa-circle-o"></i> Jabatan</a></li>
                   <li class="<?php if($get === "dokter") {echo "active";} else {echo "";}?>"><a href="../dokter/"><i class="fa fa-circle-o"></i> Dokter</a></li>
                   <li class="<?php if($get === "staff") {echo "active";} else {echo "";}?>"><a href="../staff/"><i class="fa fa-circle-o"></i> Staff</a></li>
                 </ul>
@@ -75,7 +74,7 @@
                   <li class="<?php if($get === "records") {echo "active";} else {echo "";}?>"><a href="../records/"><i class="fa fa-circle-o"></i> Rekam Medis</a></li>
                 </ul>
               </li>
-              <li class="<?php if($get === "layanan" OR $get === "ruangan" OR $get === "obat") {echo "treeview active menu-open";} else {echo "treeview";}?>">
+              <li class="<?php if($get === "layanan" OR $get === "ruangan" OR $get === "obat" OR $get === "satuan") {echo "treeview active menu-open";} else {echo "treeview";}?>">
                 <a href="#">
                   <i class="fa fa-ambulance"></i>
                   <span>Pelayanan</span>
@@ -86,7 +85,7 @@
                 <ul class="treeview-menu">
                   <li class="<?php if($get === "layanan") {echo "active";} else {echo "";}?>"><a href="../layanan/"><i class="fa fa-circle-o"></i> Jenis Pelayanan</a></li>
                   <li class="<?php if($get === "ruangan") {echo "active";} else {echo "";}?>"><a href="../ruangan/"><i class="fa fa-circle-o"></i> Ruangan</a></li>
-                  <li class="<?php if($get === "obat") {echo "active";} else {echo "";}?>"><a href="../obat/"><i class="fa fa-circle-o"></i> Stock Obat</a></li>
+                  <li class="<?php if($get === "obat" OR $get === "satuan") {echo "active";} else {echo "";}?>"><a href="../obat/"><i class="fa fa-circle-o"></i> Stock Obat</a></li>
                 </ul>
               </li>
               <li class="<?php if($get === "pesan" OR $get === "user" OR $get === "role") {echo "treeview active menu-open";} else {echo "treeview";}?>">

@@ -17,35 +17,9 @@ if (isset($_SESSION['email'])) {
 <div class="wrapper">
 
   <header class="main-header">
-    <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><img src="../../favicon.png" width="20px"></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>E</b>-Puskesmas</span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <?php
-          include '../layout/massage.php';
-          include '../layout/notification.php';
-          include '../layout/tasks.php';
-          include '../layout/user.php';
-          ?>
-          <!-- Control Sidebar Toggle Button -->
-          <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+ <?php
+ include '../layout/header.php';
+ ?>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
@@ -75,6 +49,7 @@ if (isset($_SESSION['email'])) {
       <div class="box box-success">
          <div class="box-header with-border">
           <a href="record_cek.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Data</a>
+          <a href="record_print.php" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>
           </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -86,6 +61,7 @@ if (isset($_SESSION['email'])) {
                     <th style="width: 10px">No</th>
                     <th>Nama Pasien</th>
                     <th>Tanggal Masuk</th>
+                    <th>Jam</th>
                     <th>Keluhan</th>
                     <th>Jenis Pelayanan</th>
                     <th>Action</th>
@@ -105,13 +81,15 @@ if (isset($_SESSION['email'])) {
                           echo "
                             <tr>
                               <td>".$nomor++."</td>
-                              <td>".$row['id_member']."</td>
-                              <td>".$row['tanggal_masuk']."</td>
+                              <td>".user($row['id_member'])."</td>
+                              <td>".date('d F Y', strtotime($row['tanggal_masuk']))."</td>
+                              <td>".date('H:i', strtotime($row['tanggal_masuk']))." WIB</td>
                               <td>".$row['keluhan']."</td>
-                              <td>".$row['id_layanan']."</td>
+                              <td>".pelayanan($row['id_layanan'])."</td>
                               <td>
-                                <a href='member_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                <a href='member_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
+                                <a href='member_edit.php?id=".$row['id']."' class='btn btn-info btn-xs' data-toggle='tooltip' title='Detail'><i class='fa fa-search'></i></a>
+                                <a href='member_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs' data-toggle='tooltip' title='Edit'><i class='fa fa-pencil'></i></a>
+                                <a href='member_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs' data-toggle='tooltip' title='Delete'><i class='fa fa-trash'></i></a>
                               </td>
                             </tr>
                           ";

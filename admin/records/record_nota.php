@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Jenis Jabatan</title>
+  <title>Records Pasien</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -33,138 +33,170 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Daftar Jenis Jabatan
+        Rekam Medis
       </h1>
       <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Jenis Jabatan</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Rekam Medis</a></li>
+        <li class="active">Invoice</li>
       </ol>
     </section>
 
+<?php
+include '../../config/koneksi.php';
+include '../../config/function.php';
+
+$no            = 1;
+$index         = 0;
+
+$nomor         = $_SESSION['id_pasien'];
+$sql           = "SELECT * FROM records WHERE id_member='$nomor'";
+$result        = mysqli_query($konek, $sql);
+$row           = mysqli_fetch_assoc($result);
+
+$sql3          = "SELECT * FROM records ORDER BY id DESC LIMIT 1";
+$result3       = mysqli_query($konek, $sql3);
+$row3          = mysqli_fetch_assoc($result3);
+$id_record     = $row3['id'];
+
+$sql4          = "SELECT * FROM record_obat WHERE id_record=$id_record";
+$result4       = mysqli_query($konek, $sql4);
+
+?>
+
     <!-- Main content -->
-    <section class="content">
+    <section class="invoice">
+      <!-- title row -->
       <div class="row">
-        <div class="col-md-12">
-          <!-- Custom Tabs -->
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Jenis Jabatan</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Nama Jabatan</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-                <div class="section">
-                  <div class="box-header with-border">
-                    <a href="tipe_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Jenis Jabatan</a>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <tr>
-                            <th style="width: 10px">No</th>
-                            <th>Jenis Jabatan</th>
-                            <th>Action</th>
-                          </tr>
-                      </thead>
-                        <?php
-                          include '../../config/koneksi.php';
-                          include '../../config/function.php';
-                          $no_jenis  = 1;
-                          $no_jab    = 1;
-                          $sql    = "SELECT * FROM jenis_jabatan";
-                          $result = mysqli_query($konek, $sql);
-
-                          $sql2    = "SELECT * FROM jabatan";
-                          $result2 = mysqli_query($konek, $sql2);
-
-                          if (mysqli_num_rows($result)>0) {
-                                while ($row = mysqli_fetch_assoc($result)){
-                                  echo "
-                                    <tr>
-                                      <td>".$no_jenis++."</td>
-                                      <td>".$row['nama']."</td>
-                                      <td>
-                                        <a href='tipe_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                        <a href='tipe_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                                      </td>
-                                    </tr>
-                                  ";
-                                }
-                              } else {
-                                echo "
-                                  <tr>
-                                    <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                                  </tr>
-                                ";
-                              }
-                         
-                          ?>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2">
-                <div class="section">
-                  <div class="box-header with-border">
-                    <a href="jabatan_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Nama Jabatan</a>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example1" class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <tr>
-                            <th style="width: 10px">No</th>
-                            <th>Jabatan</th>
-                            <th>Jenis Jabatan</th>
-                            <th>Action</th>
-                          </tr>
-                      </thead>
-                      <?php
-                        if (mysqli_num_rows($result2)>0) {
-                          while ($row2 = mysqli_fetch_assoc($result2)){
-                            echo "
-                              <tr>
-                                <td>".$no_jab++."</td>
-                                <td>".$row2['nama']."</td>
-                                <td>".job($row2['id_jenis'])."</td>
-                                <td>
-                                  <a href='jabatan_edit.php?id=".$row2['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                  <a href='jabatan_delete.php?id=".$row2['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                                </td>
-                              </tr>
-                            ";
-                          }
-                        } else {
-                          echo "
-                            <tr>
-                              <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                            </tr>
-                          ";
-                        }
-                      ?>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- nav-tabs-custom -->
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-file-text-o"></i> Nota Rekam Medis
+            <small class="pull-right">Date: <?= date('d/m/Y')." ".date('H:i')." WIB"; ?></small>
+          </h2>
         </div>
         <!-- /.col -->
-
+      </div>
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          <address>
+            No Pasien<br>
+            <strong><?= $_SESSION['id_pasien'] ?></strong><br>
+            Nama Pasien<br>
+            <strong><?= $_SESSION['nama_pasien'] ?></strong><br>
+            Tanggal Masuk<br>
+            <strong><?= date('d F Y - H:i', strtotime($row['tanggal_masuk']))." WIB"; ?></strong>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          <address>
+            Keluhan<br>
+            <strong><?= $row['keluhan']; ?></strong><br>
+            Ambil Pelayanan<br>
+            <strong><?= pelayanan($row['id_layanan']) ?></strong><br>
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+         <address>
+            Ditangani oleh Dokter<br>
+            <strong><?= dokter($row['id_dokter']) ?></strong><br>
+            di Ruang<br>
+            <strong><?= ruang($row['id_ruang']) ?></strong><br>
+          </address>
+        </div>
         <!-- /.col -->
       </div>
-      
-            <!-- /.box-body -->
+      <!-- /.row -->
 
+      <!-- Table row -->
+      <div class="row">
+        <div class="col-xs-12 table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Obat</th>
+              <th>Jumlah</th>
+              <th>Harga Satuan</th>
+              <th>Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+              <?php
+              include '../../config/koneksi.php';
+
+              if (mysqli_num_rows($result4)>0) {
+                while ($row4 = mysqli_fetch_assoc($result4)) {
+                    echo "
+                      <tr>
+                          <td>".$no++."</td>
+                          <td>".obat($row4['id_obat'])."</td>
+                          <td>".$row4['jumlah']." ".satuan($row4['id_satuan'])."</td>
+                          <td>Rp ".number_format(harga($row4['id_obat']),'0','0','.')."</td>
+                          <td>Rp ".number_format($row4['subtotal'],'0','0','.')."</td>
+                      </tr>
+                      ";
+                }
+              }
+              ?>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-xs-6">
+          <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+            Jika ada obat yang rusak atau kadaluarsa bisa hubungi bagian farmasi.
+          </p>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-6">
+
+          <div class="table-responsive">
+            <table class="table">
+              <tr>
+                <th style="width: 290px">Total :</th>
+                <td>Rp 
+                  <?php
+                  $sql5          = "SELECT SUM(subtotal) as total FROM record_obat WHERE id_record=$id_record";
+                  $result5       = mysqli_query($konek, $sql5);
+                  $row5          = mysqli_fetch_assoc($result5);
+                  $total         = $row5['total'];
+                  $view_total    = number_format($row5['total'],'0','0','.');
+
+                  echo $view_total;
+
+                  $sql6          = "UPDATE records SET tagihan = '$total' WHERE id='$id_record'";
+                  mysqli_query($konek, $sql6);
+                  ?>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- this row will not appear when printing -->
+      <div class="row no-print">
+        <div class="col-xs-12">
+          <a href="record_nota_print.php" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+          <a type="button" class="btn btn-success pull-right" href="index.php"><i class="fa fa-check"></i> Finish</a>
+<!--           <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+            <i class="fa fa-download"></i> Generate PDF
+          </button> -->
+        </div>
+      </div>
     </section>
     <!-- /.content -->
+    <div class="clearfix"></div>
   </div>
 <?php 
 include '../layout/footer.php';

@@ -1,6 +1,5 @@
-
 <!-- jQuery 3 -->
-<script src="../../AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../../js/jquery-3.3.1.js"></script>
 <script src="../../js/select2.min.js"></script>
 <script type="text/javascript">
   
@@ -64,10 +63,7 @@
 
 <script>
   $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
     CKEDITOR.replace('editor1')
-    //bootstrap WYSIHTML5 - text editor
     $('.textarea').wysihtml5()
   })
 </script>
