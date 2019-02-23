@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Obat</title>
+  <title>User | Input</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -17,13 +17,14 @@ if (isset($_SESSION['email'])) {
 <div class="wrapper">
 
   <header class="main-header">
- <?php
- include '../layout/header.php';
- ?>
+    <?php
+    include '../layout/header.php';
+    ?>
   </header>
+
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-      <?php
+     <?php
      include '../layout/sidebar.php';
      ?>
   </aside>
@@ -33,86 +34,77 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Daftar Obat
+        User Input
       </h1>
       <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Obat</li>
+        <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="index.php"> User</a></li>
+        <li class="active">Input User</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <?php
-      include '../layout/popup.php';
-      ?>
       <div class="box box-success">
-         <div class="box-header with-border">
-          <a href="obat_input.php" class="btn btn-primary pull-left" style="margin-right: 10px;"><i class="fa fa-plus-circle"></i> Input</a>
-          <a href="../satuan/" class="btn btn-info pull-left"><i class="fa fa-cubes"></i> Satuan Obat</a>
-          <a href="obat_print.php" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>
-          </div>
-            <!-- /.box-header -->
-            <div class="box-body">
+        <div class="box-header with-border">
+          <h3 class="box-title">Input User</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="staff_input_proses.php" method="POST"">
+          <div class="box-body">
 
-            <table id="example1" class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <tr>
-                    <th style="width: 10px">No</th>
-                    <th>Nama Obat</th>
-                    <th>Status</th>
-                    <th>Quantity</th>
-                    <th>Harga Satuan</th>
-                    <th>Action</th>
-                  </tr>
-              </thead>
-                <?php
-                  include '../../config/koneksi.php';
-                  include '../../config/function.php';
-
-                  $nomor  = 1;
-
-                  $sql    = "SELECT * FROM obat";
-                  $result = mysqli_query($konek, $sql);
-
-                  if (mysqli_num_rows($result)>0) {
-                        while ($row = mysqli_fetch_assoc($result)){
-                          echo "
-                            <tr>
-                              <td>".$nomor++."</td>
-                              <td>".$row['nama']."</td>
-                              <td>".jika($row['status'])."</td>
-                              <td>".$row['jumlah']." ".satuan($row['id_satuan'])."</td>
-                              <td>Rp ".number_format($row['harga'],'0','0','.')."</td>
-                              <td>
-                                <a href='obat_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                <a href='obat_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                              </td>
-                            </tr>
-                          ";
-                        }
-                      } else {
-                        echo "
-                          <tr>
-                            <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                          </tr>
-                        ";
-                      }
-                 
-                  ?>
-              </table>
-
+            <div class="form-group">
+              <label for="nama">Nama<span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="nama" name="nama" required>
             </div>
-            <!-- /.box-body -->
 
+            <div class="form-group">
+              <label for="email">Email<span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password<span class="text-red">*</span></label>
+              <input type="text" class="form-control" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+              <label for="role">Role <span class="text-red">*</span></label>
+              <select name="role" id="role" class="form-control" required="">
+                <option value="">-- Role --</option>
+                  <?php
+                    include '../../config/koneksi.php';
+                    $sql1  = "SELECT * FROM role";
+                    $result1 = mysqli_query($konek, $sql1);
+                    if (mysqli_num_rows($result1) > 0) {
+                      while ($row1 = mysqli_fetch_assoc($result1)) {
+                        echo "<option value=".$row1['id'].">".$row1['nama']."</option>";
+                      }
+                    }
+                  ?>
+              </select>
+            </div>
+
+            <div class="box-footer">
+                <a type="reset" class="btn btn-default" href="index.php">Cancel</a>
+                <button type="submit" class="btn btn-success pull-right">Input</button>
+            </div>
+
+
+        </div>
+        </form>
+
+           
+      </div>
+       <!-- /.box -->
     </section>
     <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
 <?php 
 include '../layout/footer.php';
 ?>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -306,18 +298,19 @@ include '../layout/footer.php';
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+
+
 </div>
 <!-- ./wrapper -->
 
 <?php
 include '../layout/script.php';
 ?>
-
 </body>
 </html>
 
 <?php
 } else {
-  echo "Anda belum login, silahkan <a href='../../login.php'>Login</a>";
+  echo "Anda belum login, silahkan <a href='../index.php'>Login</a>";
 }
 ?>

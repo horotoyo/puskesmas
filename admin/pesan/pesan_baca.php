@@ -8,12 +8,110 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Obat</title>
- <?php
- include '../layout/head.php';
- ?>
+  <title>Pesan</title>
+ <?php include '../layout/head.php';?>
 </head>
 <body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Read Messages
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Mailbox</li>
+      </ol>
+    </section>
+
+          <?php
+          include '../../config/koneksi.php';
+          include '../../config/function.php';
+
+          $ID     = $_GET['id'];
+          $sql    = "SELECT * FROM inbox WHERE id='$ID'";
+          $result = mysqli_query($konek, $sql);
+          $row    = mysqli_fetch_assoc($result);
+
+          $sql1    = "SELECT COUNT(*) FROM inbox";
+          $result1 = mysqli_query($konek, $sql1);
+          $row1    = mysqli_fetch_row($result1);
+          $view   = $row1[0];
+
+          ?>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Folders</h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="index.php"><i class="fa fa-inbox"></i> Inbox
+                  <span class="label label-primary pull-right"><?= $view ?> messages</span></a></li>
+                <li><a><i class="fa fa-circle-o"></i> Baca Pesan</a></li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Read Mail</h3>
+
+              <div class="box-tools pull-right">
+                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
+                <a href="#" class="btn btn-box-tool" data-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div class="mailbox-read-info">
+                <h3><?= $row['nama']?></h3>
+                <h5>From: <?= $row['email']?>
+                  <span class="mailbox-read-time pull-right"><?= date('d F Y H:i', strtotime($row['tanggal']))." WIB"?></span></h5>
+              </div>
+              <!-- /.mailbox-read-info -->
+  
+              <!-- /.mailbox-controls -->
+              <div class="mailbox-read-message">
+                <?= $row['isi']?>
+              </div>
+              <!-- /.mailbox-read-message -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <a href="pesan_delete.php?id=<?= $row['id'] ?>" onclick="javascript:return confirm('\'Apakah anda yakin ingin menghapus pesan ini?\'')">
+                <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button></a>
+              <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
 <div class="wrapper">
 
   <header class="main-header">
@@ -28,86 +126,7 @@ if (isset($_SESSION['email'])) {
      ?>
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Daftar Obat
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Obat</li>
-      </ol>
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <?php
-      include '../layout/popup.php';
-      ?>
-      <div class="box box-success">
-         <div class="box-header with-border">
-          <a href="obat_input.php" class="btn btn-primary pull-left" style="margin-right: 10px;"><i class="fa fa-plus-circle"></i> Input</a>
-          <a href="../satuan/" class="btn btn-info pull-left"><i class="fa fa-cubes"></i> Satuan Obat</a>
-          <a href="obat_print.php" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>
-          </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-
-            <table id="example1" class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <tr>
-                    <th style="width: 10px">No</th>
-                    <th>Nama Obat</th>
-                    <th>Status</th>
-                    <th>Quantity</th>
-                    <th>Harga Satuan</th>
-                    <th>Action</th>
-                  </tr>
-              </thead>
-                <?php
-                  include '../../config/koneksi.php';
-                  include '../../config/function.php';
-
-                  $nomor  = 1;
-
-                  $sql    = "SELECT * FROM obat";
-                  $result = mysqli_query($konek, $sql);
-
-                  if (mysqli_num_rows($result)>0) {
-                        while ($row = mysqli_fetch_assoc($result)){
-                          echo "
-                            <tr>
-                              <td>".$nomor++."</td>
-                              <td>".$row['nama']."</td>
-                              <td>".jika($row['status'])."</td>
-                              <td>".$row['jumlah']." ".satuan($row['id_satuan'])."</td>
-                              <td>Rp ".number_format($row['harga'],'0','0','.')."</td>
-                              <td>
-                                <a href='obat_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                <a href='obat_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                              </td>
-                            </tr>
-                          ";
-                        }
-                      } else {
-                        echo "
-                          <tr>
-                            <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                          </tr>
-                        ";
-                      }
-                 
-                  ?>
-              </table>
-
-            </div>
-            <!-- /.box-body -->
-
-    </section>
-    <!-- /.content -->
   </div>
 <?php 
 include '../layout/footer.php';

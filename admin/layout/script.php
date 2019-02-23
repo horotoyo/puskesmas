@@ -58,8 +58,9 @@
 <script src="../../AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- iCheck 1.0.1 -->
 <script src="../../AdminLTE-2.4.5/plugins/iCheck/icheck.min.js"></script>
-<!-- Pop up js script -->
-<script src="../../js/popup.js"></script>
+
+<!-- chart js script -->
+<script src="../../AdminLTE-2.4.5/bower_components/chart.js/Chart.js"></script>
 
 <script>
   $(function () {
@@ -80,4 +81,22 @@
       'autoWidth'   : false
     })
   })
+</script>
+<script>
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
 </script>

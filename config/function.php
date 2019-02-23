@@ -101,5 +101,13 @@ function jika($status) {
 	}
 }
 
+function kalau($status) {
+	if ($status==0) {
+		return "<em>Tersedia</em>";
+	} else {
+		return "<em>Kosong</em>";
+	}
+}
+
 
 ?>

@@ -66,7 +66,7 @@ if (isset($_SESSION['email'])) {
                 <option value="">-- Jabatan --</option>
                   <?php
                     include '../../config/koneksi.php';
-                    $sql1  = "SELECT * FROM jabatan WHERE jenis=1";
+                    $sql1  = "SELECT * FROM jabatan WHERE id_jenis=1";
                     $result1 = mysqli_query($konek, $sql1);
                     if (mysqli_num_rows($result1) > 0) {
                       while ($row1 = mysqli_fetch_assoc($result1)) {

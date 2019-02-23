@@ -88,16 +88,20 @@
                   <li class="<?php if($get === "obat" OR $get === "satuan") {echo "active";} else {echo "";}?>"><a href="../obat/"><i class="fa fa-circle-o"></i> Stock Obat</a></li>
                 </ul>
               </li>
-              <li class="<?php if($get === "pesan" OR $get === "user" OR $get === "role") {echo "treeview active menu-open";} else {echo "treeview";}?>">
+              <li class="<?php if($get === "pesan") {echo "active";} else {echo "";}?>">
+                <a href="../pesan/">
+                  <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                </a>
+              </li>
+              <li class="<?php if($get === "user" OR $get === "role") {echo "treeview active menu-open";} else {echo "treeview";}?>">
                 <a href="#">
-                  <i class="fa fa-users"></i>
+                  <i class="fa fa-globe"></i>
                   <span>Blog</span>
                   <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
                 </a>
                 <ul class="treeview-menu">
-                  <li class="<?php if($get === "pesan") {echo "active";} else {echo "";}?>"><a href="../pesan/"><i class="fa fa-circle-o"></i> Pesan</a></li>
                   <li class="<?php if($get === "user") {echo "active";} else {echo "";}?>"><a href="../user/"><i class="fa fa-circle-o"></i> User</a></li>
                   <li class="<?php if($get === "role") {echo "active";} else {echo "";}?>"><a href="../role/"><i class="fa fa-circle-o"></i> Role</a></li>
                 </ul>

@@ -116,11 +116,11 @@ body {
   <div class="form">
     <form class="login-form" action="config/proses_login.php" method="post">
       <a href="index.php"><img src="favicon.png" width="50px"></a>
-      <p>Login Member</p>
+      <p>Login <b>dePuskesmas</b></p>
       <input type="text" name="email" placeholder="username"/>
       <input type="password" name="password" placeholder="password"/>
       <button>MASUK</button>
-      <p class="message">Belum mendaftar? <a href="#">Buat akun baru</a></p>
+      <!-- <p class="message">Belum mendaftar? <a href="#">Buat akun baru</a></p> -->
     </form>
   </div>
 </div>

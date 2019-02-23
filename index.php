@@ -607,7 +607,7 @@
 							}
 						}
 					} else {
-						$sql = "INSERT INTO pesan (nama, email, isi, tanggal) VALUES ('$nama', '$email', '$isi', '$tanggal')";
+						$sql = "INSERT INTO inbox (nama, email, isi, tanggal) VALUES ('$nama', '$email', '$isi', '$tanggal')";
 						mysqli_query($konek,$sql);
 					}
 

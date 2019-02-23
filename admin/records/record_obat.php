@@ -8,7 +8,7 @@
                           <?php
                             include '../../config/koneksi.php';
 
-                            $sql4    = "SELECT * FROM obat";
+                            $sql4    = "SELECT * FROM obat WHERE status=0";
                             $result4 = mysqli_query($konek, $sql4);
                             if (mysqli_num_rows($result4) > 0) {
                               while ($row4 = mysqli_fetch_assoc($result4)) {

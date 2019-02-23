@@ -9,11 +9,135 @@ if (isset($_SESSION['email'])) {
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Pesan</title>
- <?php
- include '../layout/head.php';
- ?>
+ <?php include '../layout/head.php';?>
 </head>
 <body class="hold-transition skin-green fixed sidebar-mini">
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Mailbox
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Mailbox</li>
+      </ol>
+    </section>
+          <?php
+          include '../../config/koneksi.php';
+
+          $sql    = "SELECT COUNT(*) FROM inbox";
+          $result = mysqli_query($konek, $sql);
+          $row    = mysqli_fetch_row($result);
+          $view   = $row[0];
+
+          ?>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <div class="col-md-3">
+
+          <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Folders</h3>
+
+              <div class="box-tools">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="box-body no-padding">
+              <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
+                  <span class="label label-primary pull-right"><?= $view ?> messages</span>
+                </a></li>
+              </ul>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Inbox</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="table-responsive mailbox-messages">
+                <table id="example1" class="table table-hover table-striped">
+                  <thead>
+                    <td>Nama Pengirim</td>
+                    <td>Isi</td>
+                    <td>Time</td>
+                  </thead>
+                  <tbody>
+                  <?php
+                  include '../../config/koneksi.php';
+                  include '../../config/function.php';
+
+                  $nomor  = 1;
+                  $sql    = "SELECT * FROM inbox ORDER BY tanggal DESC";
+                  $result = mysqli_query($konek, $sql);
+
+                  if (mysqli_num_rows($result)>0) {
+                        while ($row = mysqli_fetch_assoc($result)){
+
+                          $text   = $row['isi'];
+                          $count  = strlen($text);
+
+                          if ($count > 40) {
+                            $change  = substr($text, 0, 40);
+                            $view    = $change."...";
+                          } else {
+                            $view    = $row['isi'];
+                          }
+
+                          echo "
+                            <tr>
+                              <td class='mailbox-name'><a href='pesan_baca.php?id=".$row['id']."'>".$row['nama']."</a></td>
+                              <td class='mailbox-subject'>".$view."</td>
+                              <td class='mailbox-date'>".date('d F Y', strtotime($row['tanggal']))."</td>
+                            </tr>
+                          ";
+                        }
+                      } else {
+                        echo "
+                          <tr>
+                            <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
+                          </tr>
+                        ";
+                      }
+                 
+                  ?>
+                  </tbody>
+                </table>
+                <!-- /.table -->
+              </div>
+              <!-- /.mail-box-messages -->
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer no-padding">
+              <div class="mailbox-controls">
+                <!-- /.pull-right -->
+              </div>
+            </div>
+          </div>
+          <!-- /. box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
 <div class="wrapper">
 
   <header class="main-header">
@@ -28,81 +152,7 @@ if (isset($_SESSION['email'])) {
      ?>
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Daftar Pesan
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Pesan</li>
-      </ol>
-    </section>
 
-    <!-- Main content -->
-    <section class="content">
-      <?php
-      include '../layout/popup.php';
-      ?>
-      <div class="box box-success">
-            <!-- /.box-header -->
-            <div class="box-body">
-
-            <table id="example1" class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <tr>
-                    <th style="width: 10px">No</th>
-                    <th>Nama</th>
-                    <th>Email</th>
-                    <th>Isi</th>
-                    <th>Tanggal</th>
-                    <th>Jam</th>
-                    <th>Action</th>
-                  </tr>
-              </thead>
-                <?php
-                  include '../../config/koneksi.php';
-                  include '../../config/function.php';
-
-                  $nomor  = 1;
-                  $sql    = "SELECT * FROM pesan";
-                  $result = mysqli_query($konek, $sql);
-
-                  if (mysqli_num_rows($result)>0) {
-                        while ($row = mysqli_fetch_assoc($result)){
-                          echo "
-                            <tr>
-                              <td>".$nomor++."</td>
-                              <td>".$row['nama']."</td>
-                              <td>".$row['email']."</td>
-                              <td>".$row['isi']."</td>
-                              <td>".date('d-m-Y', strtotime($row['tanggal']))."</td>
-                              <td>".date('H:i', strtotime($row['tanggal']))." WIB"."</td>
-                              <td>
-                                <a href='pesan_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                              </td>
-                            </tr>
-                          ";
-                        }
-                      } else {
-                        echo "
-                          <tr>
-                            <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                          </tr>
-                        ";
-                      }
-                 
-                  ?>
-              </table>
-
-            </div>
-            <!-- /.box-body -->
-
-    </section>
-    <!-- /.content -->
   </div>
 <?php 
 include '../layout/footer.php';
