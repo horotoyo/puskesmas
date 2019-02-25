@@ -9,6 +9,7 @@ function user($id) {
 	return $row['nama'];
 }
 
+
 function jabatan($id) {
 	global $konek;
 	$sql   		= "SELECT nama FROM jabatan WHERE id=".$id;
