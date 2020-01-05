@@ -100,7 +100,7 @@ if (isset($_SESSION['email'])) {
                               <td>".$row['telp']."</td>
                               <td>".date('d F Y', strtotime($row['tanggal_pendaftaran']))."</td>
                               <td>
-                                <a data-toggle='tooltip' title='Detail'><button type='button' class='btn btn-info btn-xs' data-toggle='modal' data-target='#modal-default'><i class='fa fa-search'></i></button></a>
+                                <a href='member_detail.php?id=".$row['id']."' data-toggle='tooltip' title='Detail'><button type='button' class='btn btn-info btn-xs' data-toggle='modal'><i class='fa fa-search'></i></button></a>
                                 <a href='member_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs' data-toggle='tooltip' title='Edit'><i class='fa fa-pencil'></i></a>
                                 <a href='member_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs' data-toggle='tooltip' title='Delete'><i class='fa fa-trash'></i></a>
                               </td>
@@ -117,71 +117,6 @@ if (isset($_SESSION['email'])) {
                  
                   ?>
               </table>
-              <div class="modal fade" id="modal-default">
-                <div class="modal-dialog" style="width: 650px; margin: 80px 20px 10px 430px;">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title">Data Pasien</h4>
-                    </div>
-                    <div class="modal-body">
-                      <div class="form-group">
-                        <table>
-                          <tr>
-                            <td style="width: 100px"><label>No Pasien</label></td>
-                            <td>:</td>
-                            <td><?=$row['nama']?></td>
-                          </tr>
-                          <tr>
-                            <td><label>Nama Pasien</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>TTL</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Alamat</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>No. HP/Telp</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Gol Darah</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Jenis Kelamin</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td><label>Tgl Registrasi</label></td>
-                            <td>:</td>
-                            <td></td>
-                          </tr>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-success">Edit Data</button>
-                    </div>
-                  </div>
-                  <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-              </div>
-              <!-- /.modal -->
-
             </div>
             <!-- /.box-body -->
 

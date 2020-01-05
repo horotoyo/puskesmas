@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Members | Input</title>
+  <title>Pasien | Input</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -39,8 +39,8 @@ if (isset($_SESSION['email'])) {
       </h1>
       <ol class="breadcrumb">
         <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="index.php"> Members</a></li>
-        <li class="active">Input Members</li>
+        <li><a href="index.php"> Pasien</a></li>
+        <li class="active">Input Pasien</li>
       </ol>
     </section>
 

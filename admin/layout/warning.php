@@ -43,7 +43,7 @@
 
                 <p>Anda belum login. Silahkan login terlebih dahulu.</p>
               </div>
-                <a href="../../login.php""><button class="btn btn-success">Ke Halaman Login</button></a>
+                <a href="../../login.php"><button class="btn btn-success">Ke Halaman Login</button></a>
 
 
             </div>

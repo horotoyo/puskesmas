@@ -8,7 +8,7 @@ if (isset($_SESSION['email'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Jenis Jabatan</title>
+  <title>Members | Detail</title>
  <?php
  include '../layout/head.php';
  ?>
@@ -17,13 +17,14 @@ if (isset($_SESSION['email'])) {
 <div class="wrapper">
 
   <header class="main-header">
- <?php
- include '../layout/header.php';
- ?>
+    <?php
+    include '../layout/header.php';
+    ?>
   </header>
+
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
-      <?php
+     <?php
      include '../layout/sidebar.php';
      ?>
   </aside>
@@ -33,143 +34,136 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Daftar Jenis Jabatan
+        Detail
       </h1>
       <ol class="breadcrumb">
-        <li><a href="http://localhost/agency/admin/home/"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Jenis Jabatan</li>
+        <li><a href="../home/index.php"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="index.php"> Pasien</a></li>
+        <li class="active">Detail Pasien</li>
       </ol>
     </section>
 
     <!-- Main content -->
     <section class="content">
-      <div class="row">
-        <div class="col-md-12">
-          <!-- Custom Tabs -->
-          <div class="nav-tabs-custom">
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#tab_1" data-toggle="tab">Jenis Jabatan</a></li>
-              <li><a href="#tab_2" data-toggle="tab">Nama Jabatan</a></li>
-            </ul>
-            <div class="tab-content">
-              <div class="tab-pane active" id="tab_1">
-                <div class="section">
-                  <div class="box-header with-border">
-                    <a href="tipe_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Jenis Jabatan</a>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example2" class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <tr>
-                            <th style="width: 10px">No</th>
-                            <th>Jenis Jabatan</th>
-                            <th>Action</th>
-                          </tr>
-                      </thead>
-                        <?php
-                          include '../../config/koneksi.php';
-                          include '../../config/function.php';
-                          $no_jenis  = 1;
-                          $no_jab    = 1;
-                          $sql    = "SELECT * FROM jenis_jabatan";
-                          $result = mysqli_query($konek, $sql);
+    <?php 
+    include '../../config/koneksi.php';
+    include '../../config/function.php';
 
-                          $sql2    = "SELECT * FROM jabatan";
-                          $result2 = mysqli_query($konek, $sql2);
+    $ID       = $_GET['id'];
+    $sql      = "SELECT * FROM members WHERE id='$ID'";
+    $result   = mysqli_query($konek, $sql);
+    $row      = mysqli_fetch_assoc($result);
+    $index    = $row['id'];
+    $take     = substr($index, 0, 3);
+    
+    if ($take == "110") {
+      $view = "Bleberan";
+    } elseif ($take == "120") {
+      $view = "Dengok";
+    }  elseif ($take == "130") {
+      $view = "Banyusoca";
+    }  elseif ($take == "140") {
+      $view = "Getas";
+    }  elseif ($take == "150") {
+      $view = "Ngleri";
+    }  elseif ($take == "160") {
+      $view = "Plembutan";
+    }  else {
+      $view = "Luar Wilayah";
+    }
 
-                          if (mysqli_num_rows($result)>0) {
-                                while ($row = mysqli_fetch_assoc($result)){
-                                  echo "
-                                    <tr>
-                                      <td>".$no_jenis++."</td>
-                                      <td>".$row['nama']."</td>
-                                      <td>
-                                        <a href='tipe_edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                        <a href='tipe_delete.php?id=".$row['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                                      </td>
-                                    </tr>
-                                  ";
-                                }
-                              } else {
-                                echo "
-                                  <tr>
-                                    <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                                  </tr>
-                                ";
-                              }
-                         
-                          ?>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /.tab-pane -->
-              <div class="tab-pane" id="tab_2">
-                <div class="section">
-                  <div class="box-header with-border">
-                    <a href="jabatan_input.php" class="btn btn-primary pull-left"><i class="fa fa-plus-circle"></i> Input Nama Jabatan</a>
-                  </div>
-                  <!-- /.box-header -->
-                  <div class="box-body">
-                    <table id="example1" class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <tr>
-                            <th style="width: 10px">No</th>
-                            <th>Jabatan</th>
-                            <th>Jenis Jabatan</th>
-                            <th>Action</th>
-                          </tr>
-                      </thead>
-                      <?php
-                        if (mysqli_num_rows($result2)>0) {
-                          while ($row2 = mysqli_fetch_assoc($result2)){
-                            echo "
-                              <tr>
-                                <td>".$no_jab++."</td>
-                                <td>".$row2['nama']."</td>
-                                <td>".job($row2['id_jenis'])."</td>
-                                <td>
-                                  <a href='jabatan_edit.php?id=".$row2['id']."' class='btn btn-primary btn-xs'>Edit</a>
-                                  <a href='jabatan_delete.php?id=".$row2['id']."' onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Delete</a>
-                                </td>
-                              </tr>
-                            ";
-                          }
-                        } else {
-                          echo "
-                            <tr>
-                              <td colspan='8' align='center'>Tidak ada data yang ditemukan sebagai admin.</td>
-                            </tr>
-                          ";
-                        }
-                      ?>
-                      </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /.tab-pane -->
-            </div>
-            <!-- /.tab-content -->
-          </div>
-          <!-- nav-tabs-custom -->
+    ?>
+
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Detail Pasien</h3>
         </div>
-        <!-- /.col -->
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form role="form" action="member_input_proses.php" method="POST"">
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-6">
 
-        <!-- /.col -->
+                <div class="form-group">
+                  <label for="wilker">Desa Cakupan Wilayah Kerja<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $view?></div>
+<!--                   <select name="wilker" id="wilker" class="form-control" required>
+                    <option value="">-- Pilih --</option>
+                    <option value="110">Bleberan</option>
+                    <option value="120">Dengok</option>
+                    <option value="130">Banyusoca</option>
+                    <option value="140">Getas</option>
+                    <option value="150">Ngleri</option>
+                    <option value="160">Plembutan</option>
+                    <option value="270">Luar Wilayah</option>
+                  </select> -->
+                </div>
+
+                <div class="form-group">
+                  <label for="nomor">Nomor Pasien<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $row['id']?></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="nama">Nama Pasien<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $row['nama']?></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tmp_lahir">Tempat Lahir<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $row['tempat_lahir']?></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tgl_lahir">Tanggal Lahir<span class="text-red">*</span></label>
+                  <div class="form-control"><?= date('d F Y', strtotime($row['tanggal_lahir']))?></div>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label for="alamat">Alamat<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $row['alamat']?></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="telp">No. Hp/Telp<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $row['telp']?></div>
+                </div>
+
+                <div class="form-group">
+                  <label for="gol">Golongan Darah<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $row['gol_darah']?></div>
+                </div>
+
+                <div class="form-group">
+                  <label style="margin-bottom: 0px;">Jenis Kelamin<span class="text-red">*</span></label>
+                  <div class="form-control"><?= $row['jk']?></div>
+                </div>
+
+              </div>
+            </div>
+        
+          <div class="box-footer">
+            <a href="index.php" class="btn btn-success pull-right"><i class="fa fa-check"></i> Finish</a>
+            <a href="member_edit.php?id=<?=$row['id']?>" class="btn btn-primary pull-right" style="margin-right: 10px"><i class="fa fa-pencil"></i> Edit</a>
+            <a href="member_person_print.php" target="_blank" class="btn btn-default pull-right" style="margin-right: 10px"><i class="fa fa-print"></i> Print</a>
+          </div>
+
+          </div>
+        </form>           
       </div>
-      
-            <!-- /.box-body -->
-
+       <!-- /.box -->
     </section>
     <!-- /.content -->
   </div>
+  <!-- /.content-wrapper -->
 <?php 
 include '../layout/footer.php';
 ?>
-
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -363,13 +357,14 @@ include '../layout/footer.php';
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
   <div class="control-sidebar-bg"></div>
+
+
 </div>
 <!-- ./wrapper -->
 
 <?php
 include '../layout/script.php';
 ?>
-
 </body>
 </html>
 
